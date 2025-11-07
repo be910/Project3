@@ -296,4 +296,3 @@ loadData().then(rawData => {
   setupChart(americas);
   update(americas, yearRange.min);
 });
-
