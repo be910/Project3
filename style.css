@@ -1,308 +1,76 @@
-/* General styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.container {
-    max-width: 1500px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 20px;
+  font-size: 16px; /* general text bigger */
 }
 
 h1 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 32px;
+  margin-bottom: 20px;
+  font-size: 35px; /* title larger */
 }
 
-/* Controls section */
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.button-group {
-    display: flex;
-    gap: 15px;
+#controls {
+  margin-bottom: 10px;
 }
 
 button {
-    padding: 12px 24px;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px 14px;
+  margin: 0 4px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-button:hover {
-    background: #5568d3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+#chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
 }
 
-button:active {
-    transform: translateY(0);
-}
-
-/* Chart container */
 #chart {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    border: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+#legend-container {
+  width: 200px;
+  height: 500px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.legend {
+  cursor: pointer;
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+}
+
+.legend svg {
+  flex-shrink: 0;
+}
+
+.legend text, .legend span {
+  user-select: none;
+  margin-left: 6px;
 }
 
 svg {
-    display: block;
-    margin: 0 auto;
-    overflow: visible !important;
-    transition: none;
+  background: white;
+  border: 1px solid #ccc;
 }
 
-/* Line styling */
-.line {
-    fill: none;
-    stroke-width: 2.5px;
-    transition: all 0.3s ease;
-}
-
-.line:hover {
-    stroke-width: 4px;
-}
-
-/* Reference line at 0°C */
-.reference-line {
-    stroke: #4d5353;
-    stroke-width: 2;
-    stroke-dasharray: 5, 5;
-    opacity: 0.5;
-}
-
-/* Grid lines */
-.grid line {
-    stroke: #e0e0e0;
-    stroke-opacity: 0.7;
-}
-
-.grid path {
-    stroke-width: 0;
-}
-
-/* Axis styling */
 .axis-label {
-    font-size: 14px;
-    font-weight: 800;
-    fill: #030405;
+  font-size: 24px;
+  font-weight: 500;
+  fill: #333;
 }
 
-.domain {
-    stroke: #95a5a6;
-    stroke-width: 2;
-}
-
-.tick line {
-    stroke: #bdc3c7;
-}
-
-.tick text {
-    fill: #1e2121;
-    font-size: 12px;
-}
-
-/* Tooltip styling */
-.tooltip {
-    position: absolute;
-    padding: 12px 16px;
-    background: rgba(44, 62, 80, 0.95);
-    color: white;
-    border-radius: 8px;
-    pointer-events: none;
-    opacity: 0;
-    font-size: 13px;
-    line-height: 1.6;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: opacity 0.2s ease;
-    z-index: 1000;
-    max-width: 250px;
-}
-
-.tooltip strong {
+.legend span {
     font-size: 15px;
-    display: block;
-    margin-bottom: 6px;
-    color: #3498db;
-}
-
-.tooltip .warming {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-.tooltip .cooling {
-    color: #3498db;
-    font-weight: bold;
-}
-
-/* Circle (data point) styling */
-circle {
-    transition: all 0.2s ease;
-}
-
-circle:hover {
-    stroke-width: 3px !important;
-}
-
-/* Scrollable legend container */
-.legend-scroll-container {
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
-}
-
-.legend-scroll-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.legend-scroll-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-.legend-scroll-container::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
-
-.legend-scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Legend item styling */
-.legend-item {
-    transition: all 0.2s ease;
-}
-
-.legend-item:hover {
-    background: #f0f0f0 !important;
-}
-
-.legend-item.inactive {
-    opacity: 0.4;
-}
-
-/* Info box */
-.info-box {
-    background: #e3f2fd;
-    border-left: 4px solid #2196f3;
-    padding: 20px;
-    border-radius: 6px;
-    margin-top: 20px;
-}
-
-.info-box h3 {
-    color: #1976d2;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.info-box p {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 8px;
-}
-
-/* Loading state */
-.loading {
-    text-align: center;
-    padding: 60px;
-    color: #7f8c8d;
-    font-size: 18px;
-}
-
-.loading::after {
-    content: '...';
-    animation: dots 1.5s steps(4, end) infinite;
-}
-
-@keyframes dots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60%, 100% { content: '...'; }
-}
-
-/* Error message */
-.error-message {
-    background-color: #fee;
-    border: 2px solid #fcc;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    color: #c33;
-    text-align: center;
-    font-size: 16px;
-}
-
-/* Responsive design */
-@media (max-width: 1024px) {
-    .controls {
-        flex-direction: column;
-    }
-    
-    .button-group {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    
-    .container {
-        padding: 15px;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    .subtitle {
-        font-size: 12px;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
 }

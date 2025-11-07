@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Surface Temperature Change</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="project3.js" type="module"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Surface Temperature Change</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="project3.js" type="module"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Global Surface Temperature Change (1961-2024)</h1>
-        
-        <div class="controls">
-            <div class="button-group">
-                <button id="show-all">Show All</button>
-                <button id="clear-all">Clear All</button>
-                <button id="top-10">Top 10 Warmest</button>
-            </div>
-        </div>
-        
-        <div id="chart"></div>
+  <h1>Surface Temperature Change</h1>
 
+  <div id="controls">
+    <button id="selectAllBtn">Select All</button>
+    <button id="backButton" style="display:none;">← Back to Continents</button>
+  </div>
+
+  <div id="chart-container">
+    <div id="chart"></div>
+    <div id="legend-container">
+      <div id="legend"></div>
     </div>
+  </div>
 
+  <script src="script.js"></script>
 </body>
 </html>
