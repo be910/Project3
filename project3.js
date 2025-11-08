@@ -39,7 +39,7 @@ function setupUI(yearRange, americasData) {
   app.append("h2").text("Surface Temperature Change in South America (1961-2024)");
   app.append("p")
    .attr("class", "pdf-link")
-   .html(`<a href="https://raw.githubusercontent.com/be910/Project3/main/Project3_WriteUp.pdf" target="_blank">See our development rationale here</a>`);
+   .html(`<a href="https://be910.github.io/Project3/main/Project3_WriteUp.pdf" target="_blank">See our development rationale here</a>`);
 
 
   const controls = app.append("div").attr("id", "controls");
