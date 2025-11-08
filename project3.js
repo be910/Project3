@@ -37,6 +37,9 @@ function setupUI(yearRange, americasData) {
   const app = d3.select("#app");
 
   app.append("h2").text("Surface Temperature Change in South America (1961-2024)");
+  app.append("p")
+    .attr("class", "pdf-link")
+    .html(`<a href="rationale.pdf" target="_blank">See our development rationale here.</a>`);
 
   const controls = app.append("div").attr("id", "controls");
 
@@ -87,9 +90,9 @@ function setupUI(yearRange, americasData) {
 
 // Chart setup
 function setupChart(data) {
-  const margin = { top: 50, right: 80, bottom: 50, left: 250 };
+  const margin = { top: 50, right: 80, bottom: 75, left: 250 };
   const width = 950;
-  const height = 800;
+  const height = 850;
 
   chartWidth = width - margin.left - margin.right;
   chartHeight = height - margin.top - margin.bottom;
@@ -101,6 +104,59 @@ function setupChart(data) {
 
   chartG = svg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Group footnote lines
+const footnoteGroup = svg.append("g")
+    .attr("transform", `translate(0,0)`); // optional, just for grouping
+
+// First line
+const line1 = footnoteGroup.append("text")
+    .attr("x", width / 2)
+    .attr("y", height - 40)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "18px")
+    .attr("font-weight", "bold")
+    .attr("fill", "#f05252ff")
+    .text("Concerns for Suriname: Suriname consistently ranks #1 in greatest temperature change");
+
+// Second line
+const line2 = footnoteGroup.append("text")
+    .attr("x", width / 2)
+    .attr("y", height - 25)
+    .attr("text-anchor", "middle")
+    .attr("font-size", "18px")
+    .attr("font-weight", "bold")
+    .attr("fill", "#f05252ff")
+    .text(" in South America after 1999!!!");
+
+// Measure bounding box of the whole group
+const bbox1 = line1.node().getBBox();
+const bbox2 = line2.node().getBBox();
+const x0 = Math.min(bbox1.x, bbox2.x) - 5; // padding left
+const y0 = bbox1.y - 2;                     // padding top
+const widthBox = Math.max(bbox1.width, bbox2.width) + 10;
+const heightBox = (bbox2.y + bbox2.height) - bbox1.y + 4;
+
+// Insert rectangle behind the text
+footnoteGroup.insert("rect", "text")  // put before the text
+    .attr("x", x0)
+    .attr("y", y0)
+    .attr("width", widthBox)
+    .attr("height", heightBox)
+    .attr("fill", "#fffafaff")    // background color
+    .attr("stroke", "#f41515ff")     // border color
+    .attr("rx", 5)
+    .attr("ry", 5);
+
+// Credit line remains the same
+svg.append("text")
+    .attr("x", (chartWidth + margin.left + margin.right) / 2)  
+    .attr("y", chartHeight + margin.top + margin.bottom - 4)  
+    .attr("text-anchor", "middle")
+    .attr("font-size", "15px")
+    .attr("fill", "#050404ff")
+    .text("Source: Macroeconomic Climate Indicators Dashboard (IMF)");
+
 
   const extent = d3.extent(data, d => d.Value);
   const padding = (extent[1] - extent[0]) * 0.1;
@@ -287,6 +343,7 @@ function updateStats(filteredData) {
 
   d3.select("#warmingCount").text(warmingCount);
 }
+
 
 // Load data and initialize
 loadData().then(rawData => {

@@ -174,3 +174,16 @@ rect:hover {
     stroke: #e27474;
     shape-rendering: crispEdges;
 }
+
+
+.pdf-link {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.pdf-link a {
+  color: #202ef3;
+  text-decoration: underline;   
+  cursor: pointer;            
+}
